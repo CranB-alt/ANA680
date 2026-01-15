@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Breast Cancer Predictor</title>
+    <style>
+        body { font-family: Arial; background: #f4f6f8; padding: 40px; }
+        .container { max-width: 450px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; margin-bottom: 20px; }
+        .form-row { margin-bottom: 15px; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; }
+        input { width: 100%; padding: 8px; }
+        .btn { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background: #0056b3; }
+        .prediction { margin-top: 20px; text-align: center; font-size: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Breast Cancer Prediction</h2>
+
+    <form action="/predict" method="POST">
+        <div class="form-row">
+            <label>Bare Nuclei</label>
+            <input type="number" step="any" name="bare_nuclei" value="{{ values.get('bare_nuclei', '') }}">
+        </div>
+
+        <div class="form-row">
+            <label>Uniformity Cell Shape</label>
+            <input type="number" step="any" name="uniformity_cell_shape" value="{{ values.get('uniformity_cell_shape', '') }}">
+        </div>
+
+        <div class="form-row">
+            <label>Uniformity Cell Size</label>
+            <input type="number" step="any" name="uniformity_cell_size" value="{{ values.get('uniformity_cell_size', '') }}">
+        </div>
+
+        <div class="form-row">
+            <label>Bland Chromatin</label>
+            <input type="number" step="any" name="bland_chromatin" value="{{ values.get('bland_chromatin', '') }}">
+        </div>
+
+        <button class="btn" type="submit">Predict</button>
+    </form>
+
+    <div class="prediction">
+        {% if predict %}
+            Prediction: {{ predict }}
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
